@@ -1,6 +1,7 @@
 package EmployeePayrollSystem;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 abstract class Employee{
     private String name;
@@ -75,7 +76,42 @@ class PayRollSystem{
             System.out.println(employee);
         }
     }
+    public void menu(){
+        System.out.println("1. All Employees");
+        System.out.println("2. Remove Employee");
+        System.out.println("3. Exit ");
+        System.out.print("Select the option : ");
+    }
+
+    public void run(){
+        Scanner scanner = new Scanner(System.in);
+        while (true){
+            System.out.println("========================");
+            System.out.print("Press 1 to open menu : ");
+            int select = scanner.nextInt();
+            if (select == 1) {
+                menu();
+                int choice = scanner.nextInt();
+                if (choice == 1) {
+                    System.out.println("Initial Employees Details : ");
+                    displayEmployees();
+                } else if (choice == 2) {
+                    System.out.print("Enter ID of the Employee that you want to remove : ");
+                    int rm = scanner.nextInt();
+                    removeEmployee(rm);
+                    System.out.println("Updated Employee List : ");
+                    displayEmployees();
+                } else if (choice == 3) {
+                    return;
+                } else {
+                    System.out.println("Invalid Input!...");
+                    menu();
+                }
+            }
+        }
+    }
 }
+
 
 public class EmployeePayrollSystem {
     public static void main(String[] args){
@@ -85,12 +121,13 @@ public class EmployeePayrollSystem {
 
         payRollSystem.addEmployee(emp1);
         payRollSystem.addEmployee(emp2);
-        
-        System.out.println("Initial Employees Details : ");
-        payRollSystem.displayEmployees();
-        System.out.println("\nRemoving Employee");
-        payRollSystem.removeEmployee(1);
-        System.out.println("\nRemaining Employees Details : ");
-        payRollSystem.displayEmployees();
+
+        payRollSystem.run();
+
+
+//        System.out.println("\nRemoving Employee");
+//        payRollSystem.removeEmployee(1);
+//        System.out.println("\nRemaining Employees Details : ");
+//        payRollSystem.displayEmployees();
     }
 }
